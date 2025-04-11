@@ -5,7 +5,7 @@ document.addEventListener('DOMContentLoaded', () => {
         const price = document.getElementById('price').value;
         const quantity = document.getElementById('quantity').value;
 
-        const response = await fetch('/.netlify/functions/post.js', {
+        const response = await fetch('/.netlify/functions/post', {
             method: 'POST',
             body: JSON.stringify({ product, price, quantity }),
         });
@@ -21,7 +21,7 @@ document.addEventListener('DOMContentLoaded', () => {
     });
 
     document.getElementById('getProducts').addEventListener('click', async () => {
-        const response = await fetch('/.netlify/functions/get.js');
+        const response = await fetch('/.netlify/functions/get');
         const products = await response.json();
 
         const productList = document.getElementById('productList');
@@ -41,7 +41,7 @@ document.addEventListener('DOMContentLoaded', () => {
         const price = document.getElementById('updatePrice').value;
         const quantity = document.getElementById('updateQuantity').value;
 
-        const response = await fetch('/.netlify/functions/put.js', {
+        const response = await fetch('/.netlify/functions/put', {
             method: 'PUT',
             body: JSON.stringify({ id, product, price, quantity }),
         });
@@ -58,7 +58,7 @@ document.addEventListener('DOMContentLoaded', () => {
         e.preventDefault();
         const id = parseInt(document.getElementById('deleteId').value);
 
-        const response = await fetch('/.netlify/functions/delete.js', {
+        const response = await fetch('/.netlify/functions/delete', {
             method: 'DELETE',
             body: JSON.stringify({ id }),
         });
