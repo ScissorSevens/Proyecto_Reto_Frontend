@@ -1,16 +1,31 @@
+const { products } = require('./data'); // Importar los datos compartidos
+
 exports.handler = async (event) => {
     if (event.httpMethod === 'DELETE') {
-        const data = JSON.parse(event.body);
+        try {
+            const data = JSON.parse(event.body);
 
-       
-        const deletedProductId = data.id;
+            // Filtrar la lista para eliminar el producto
+            const initialLength = products.length;
+            products = products.filter((p) => p.id !== data.id);
 
-        return {
-            statusCode: 200,
-            body: JSON.stringify({
-                message: `Producto con ID ${deletedProductId} eliminado exitosamente`,
-            }),
-        };
+            if (products.length === initialLength) {
+                return {
+                    statusCode: 404,
+                    body: JSON.stringify({ message: 'Producto no encontrado' }),
+                };
+            }
+
+            return {
+                statusCode: 200,
+                body: JSON.stringify({ message: 'Producto eliminado exitosamente' }),
+            };
+        } catch (error) {
+            return {
+                statusCode: 500,
+                body: JSON.stringify({ message: 'Error interno del servidor', error: error.message }),
+            };
+        }
     }
 
     return {
