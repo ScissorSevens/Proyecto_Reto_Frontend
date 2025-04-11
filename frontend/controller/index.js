@@ -7,7 +7,7 @@ document.addEventListener('DOMContentLoaded', () => {
             price: parseFloat(document.getElementById('price').value),
             quantity: parseInt(document.getElementById('quantity').value),
         };
-    
+        console.log('Datos enviados al servidor:', productData); 
         try {
             const response = await fetch('/.netlify/functions/post', {
                 method: 'POST',
