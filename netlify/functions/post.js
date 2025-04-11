@@ -1,25 +1,27 @@
-const fs = require('fs');
-const path = require('path');
-const filePath = path.join(__dirname, 'data.json');
+const fetch = require('node-fetch');
 
 exports.handler = async (event) => {
     if (event.httpMethod === 'POST') {
         try {
             const productData = JSON.parse(event.body);
 
-            // Leer los datos existentes
-            const data = JSON.parse(fs.readFileSync(filePath, 'utf-8'));
+            // Enviar los datos al formulario de Netlify
+            const response = await fetch('https://api.netlify.com/api/v1/forms/YOUR_FORM_ID/submissions', {
+                method: 'POST',
+                headers: {
+                    Authorization: `nfp_TDtuh4A8hbXdUjFZCbVySq2QqK9j8sfZ451b`, // Reemplaza con tu token de acceso personal
+                    'Content-Type': 'application/json',
+                },
+                body: JSON.stringify(productData),
+            });
 
-            // Agregar el nuevo producto
-            const newProduct = { id: data.length + 1, ...productData };
-            data.push(newProduct);
-
-            // Guardar los datos actualizados
-            fs.writeFileSync(filePath, JSON.stringify(data, null, 2));
+            if (!response.ok) {
+                throw new Error(`Error al enviar los datos al formulario: ${response.statusText}`);
+            }
 
             return {
                 statusCode: 200,
-                body: JSON.stringify({ message: 'Producto creado exitosamente', product: newProduct }),
+                body: JSON.stringify({ message: 'Producto creado exitosamente' }),
             };
         } catch (error) {
             return {
