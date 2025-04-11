@@ -9,9 +9,8 @@ const handler = async (event) => {
             const productData = JSON.parse(event.body);
             console.log('Datos del producto:', productData);
 
-            // Reemplaza <FORM_ID> con el ID correcto del formulario desde el panel de Netlify
-            ; // Asegúrate de reemplazar esto con el ID real del formulario
-            const response = await fetch(`https://api.netlify.com/api/v1/forms/<FORM_ID>/submissions`, {
+           
+            const response = await fetch(`https://api.netlify.com/api/v1/forms/YOUR_FORM_ID/submissions`, {
                 method: 'POST',
                 headers: {
                     'Authorization': `Bearer ${token}`,
