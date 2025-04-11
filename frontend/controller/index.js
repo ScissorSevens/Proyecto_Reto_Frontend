@@ -33,10 +33,10 @@ document.addEventListener('DOMContentLoaded', () => {
         event.preventDefault(); // Evita que el formulario recargue la página
     
         const productData = {
-            id: document.getElementById('productId').value, // ID del producto a actualizar
-            product: document.getElementById('productUpdate').value,
-            price: parseFloat(document.getElementById('priceUpdate').value),
-            quantity: parseInt(document.getElementById('quantityUpdate').value),
+            id: document.getElementById('updateId').value,
+            product: document.getElementById('updateProduct').value,
+            price: parseFloat(document.getElementById('updatePrice').value),
+            quantity: parseInt(document.getElementById('updateQuantity').value),
         };
     
         try {
@@ -63,7 +63,7 @@ document.addEventListener('DOMContentLoaded', () => {
     document.getElementById('deleteForm').addEventListener('submit', async (event) => {
         event.preventDefault(); // Evita que el formulario recargue la página
     
-        const productId = document.getElementById('productIdDelete').value; // ID del producto a eliminar
+        const productId = document.getElementById('deleteId').value; // ID del producto a eliminar
     
         try {
             const response = await fetch('/.netlify/functions/delete', {
