@@ -5,7 +5,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>CRUD Simulado</title>
     <link rel="stylesheet" href="styles.css">
-    <script src="controller/index.js"></script>
+    <script src="controller/index.js" defer></script>
 </head>
 <body>
     <h1>CRUD proyecto (Agroconecta)</h1>
@@ -13,13 +13,13 @@
         <!-- Crear -->
         <div class="form-box">
             <h2>Crear (POST)</h2>
-            <form id="postForm">
+            <form id="postForm" name="postForm" method="POST" data-netlify="true">
                 <label for="product">Producto:</label>
-                <input type="text" id="product" required>
+                <input type="text" id="product" name="product" required>
                 <label for="price">Precio:</label>
-                <input type="number" id="price" required>
+                <input type="number" id="price" name="price" required>
                 <label for="quantity">Cantidad:</label>
-                <input type="number" id="quantity" required>
+                <input type="number" id="quantity" name="quantity" required>
                 <button type="submit">Agregar Producto</button>
             </form>
         </div>
@@ -34,15 +34,16 @@
         <!-- Actualizar -->
         <div class="form-box">
             <h2>Actualizar (PUT)</h2>
-            <form id="putForm">
+            <form id="putForm" method="POST" data-netlify="true">
+                <input type="hidden" name="_method" value="PUT">
                 <label for="updateId">ID del Producto:</label>
-                <input type="number" id="updateId" required>
+                <input type="number" id="updateId" name="id" required>
                 <label for="updateProduct">Nuevo Producto:</label>
-                <input type="text" id="updateProduct">
+                <input type="text" id="updateProduct" name="product">
                 <label for="updatePrice">Nuevo Precio:</label>
-                <input type="number" id="updatePrice">
+                <input type="number" id="updatePrice" name="price">
                 <label for="updateQuantity">Nueva Cantidad:</label>
-                <input type="number" id="updateQuantity">
+                <input type="number" id="updateQuantity" name="quantity">
                 <button type="submit">Actualizar Producto</button>
             </form>
         </div>
@@ -50,14 +51,13 @@
         <!-- Eliminar -->
         <div class="form-box">
             <h2>Eliminar (DELETE)</h2>
-            <form id="deleteForm">
+            <form id="deleteForm" method="POST" data-netlify="true">
+                <input type="hidden" name="_method" value="DELETE">
                 <label for="deleteId">ID del Producto:</label>
-                <input type="number" id="deleteId" required>
+                <input type="number" id="deleteId" name="id" required>
                 <button type="submit">Eliminar Producto</button>
             </form>
         </div>
     </div>
-
-    
 </body>
 </html>

@@ -19,10 +19,7 @@ exports.handler = async (event) => {
 
             return {
                 statusCode: 200,
-                body: JSON.stringify({
-                    message: 'Producto creado exitosamente',
-                    product: newProduct,
-                }),
+                body: JSON.stringify({ message: 'Producto creado exitosamente', product: newProduct }),
             };
         } catch (error) {
             return {
