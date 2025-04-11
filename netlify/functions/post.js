@@ -1,16 +1,17 @@
-import fetch from 'node-fetch';
-
-export const handler = async (event) => {
+const fetch = require('node-fetch');
+const token = 'nfp_vwE6PdB5sriuL4HvYo2SN6sQomp2urwj3cb0';
+const handler = async (event) => {
     if (event.httpMethod === 'POST') {
         try {
             const productData = JSON.parse(event.body);
 
-            const response = await fetch('https://api.netlify.com/api/v1/forms/YOUR_FORM_ID/submissions', {
+            const response = await fetch('https://api.netlify.com/api/v1/forms/67f937b0ed19af0008534551/submissions', {
                 method: 'POST',
                 headers: {
-                    Authorization: `nfp_TDtuh4A8hbXdUjFZCbVySq2QqK9j8sfZ451b`,
+                    'Authorization': `Bearer ${token}`, // Reemplaza con tu token de acceso personal
                     'Content-Type': 'application/json',
                 },
+                
                 body: JSON.stringify(productData),
             });
 
@@ -35,3 +36,5 @@ export const handler = async (event) => {
         body: JSON.stringify({ message: 'Método no permitido' }),
     };
 };
+
+module.exports = { handler };
