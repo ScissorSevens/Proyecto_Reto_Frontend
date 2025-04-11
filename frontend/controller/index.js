@@ -57,17 +57,18 @@ document.addEventListener('DOMContentLoaded', () => {
     document.getElementById('deleteForm').addEventListener('submit', async (e) => {
         e.preventDefault();
         const id = parseInt(document.getElementById('deleteId').value);
-
+    
         const response = await fetch('/.netlify/functions/delete', {
             method: 'DELETE',
             body: JSON.stringify({ id }),
         });
-
-        const result = await response.json();
+    
         if (response.ok) {
+            const result = await response.json();
             alert(result.message);
         } else {
-            alert('Error al eliminar el producto');
+            const errorText = await response.text();
+            alert(`Error: ${errorText}`);
         }
     });
 });
