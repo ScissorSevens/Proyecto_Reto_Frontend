@@ -5,7 +5,7 @@ exports.handler = async () => {
         // Obtén los datos del formulario desde la API de Netlify
         const response = await fetch('https://api.netlify.com/api/v1/forms', {
             headers: {
-                Authorization: `nfp_TDtuh4A8hbXdUjFZCbVySq2QqK9j8sfZ451b`
+                Authorization: `nfp_TDtuh4A8hbXdUjFZCbVySq2QqK9j8sfZ451b`, // Reemplaza con tu token de acceso personal
             },
         });
 
