@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>CRUD Simulado</title>
+    <link rel="stylesheet" href="styles.css">
+    <script src="index.js"></script>
+</head>
+<body>
+    <h1>CRUD Simulado (Sin Backend)</h1>
+    <div class="form-container">
+        <!-- Crear -->
+        <div class="form-box">
+            <h2>Crear (POST)</h2>
+            <form id="postForm">
+                <label for="product">Producto:</label>
+                <input type="text" id="product" required>
+                <label for="price">Precio:</label>
+                <input type="number" id="price" required>
+                <label for="quantity">Cantidad:</label>
+                <input type="number" id="quantity" required>
+                <button type="submit">Agregar Producto</button>
+            </form>
+        </div>
+
+        <!-- Leer -->
+        <div class="form-box">
+            <h2>Leer (GET)</h2>
+            <button id="getProducts">Mostrar Productos</button>
+            <ul id="productList"></ul>
+        </div>
+
+        <!-- Actualizar -->
+        <div class="form-box">
+            <h2>Actualizar (PUT)</h2>
+            <form id="putForm">
+                <label for="updateId">ID del Producto:</label>
+                <input type="number" id="updateId" required>
+                <label for="updateProduct">Nuevo Producto:</label>
+                <input type="text" id="updateProduct">
+                <label for="updatePrice">Nuevo Precio:</label>
+                <input type="number" id="updatePrice">
+                <label for="updateQuantity">Nueva Cantidad:</label>
+                <input type="number" id="updateQuantity">
+                <button type="submit">Actualizar Producto</button>
+            </form>
+        </div>
+
+        <!-- Eliminar -->
+        <div class="form-box">
+            <h2>Eliminar (DELETE)</h2>
+            <form id="deleteForm">
+                <label for="deleteId">ID del Producto:</label>
+                <input type="number" id="deleteId" required>
+                <button type="submit">Eliminar Producto</button>
+            </form>
+        </div>
+    </div>
+
+    
+</body>
+</html>
