@@ -1,47 +1,71 @@
+const fetch = require('node-fetch');
 
-
-export const handler = async () => {
+const handler = async () => {
     try {
-        const response = await fetch('https://api.netlify.com/api/v1/forms', {
+        const token = 'nfp_qPjNuJCqxvHJZa9sv85dj9Cpjt8WTYTb2a5d';
+        const siteId = 'bb30cb29-65ff-4ce2-af08-03cc1d68b904'; // ID del sitio que obtuvimos
+
+        // Obtener los formularios del sitio
+        const formsResponse = await fetch(`https://api.netlify.com/api/v1/sites/${siteId}/forms`, {
             headers: {
-                Authorization: `Bearer nfp_qPjNuJCqxvHJZa9sv85dj9Cpjt8WTYTb2a5d`, // Reemplaza con tu token de acceso personal
-            },
+                'Authorization': `Bearer ${token}`
+            }
         });
-
-        if (!response.ok) {
-            throw new Error(`Error al obtener los datos del formulario: ${response.statusText}`);
+        
+        if (!formsResponse.ok) {
+            throw new Error(`Error al obtener formularios: ${formsResponse.statusText}`);
         }
-
-        const forms = await response.json();
-
-        const form = forms.find((f) => f.name === 'postForm');
+        
+        const forms = await formsResponse.json();
+        console.log('Formularios encontrados:', forms.map(f => `${f.name} (${f.id})`));
+        
+        // Buscar el formulario que usas para tu POST
+        const form = forms.find(f => f.name === 'postForm');
+        
         if (!form) {
             return {
                 statusCode: 404,
-                body: JSON.stringify({ message: 'Formulario no encontrado' }),
+                body: JSON.stringify({ message: 'Formulario "postForm" no encontrado' })
             };
         }
-
-        const entriesResponse = await fetch(`https://api.netlify.com/api/v1/forms/${form.id}/submissions`, {
+        
+        console.log(`Formulario encontrado: ${form.name} con ID: ${form.id}`);
+        
+        // Obtener los envíos de ese formulario
+        const submissionsResponse = await fetch(`https://api.netlify.com/api/v1/forms/${form.id}/submissions`, {
             headers: {
-                Authorization: `Bearer nfp_qPjNuJCqxvHJZa9sv85dj9Cpjt8WTYTb2a5d`,
-            },
+                'Authorization': `Bearer ${token}`
+            }
         });
-
-        if (!entriesResponse.ok) {
-            throw new Error(`Error al obtener las entradas del formulario: ${entriesResponse.statusText}`);
+        
+        if (!submissionsResponse.ok) {
+            throw new Error(`Error al obtener envíos: ${submissionsResponse.statusText}`);
         }
-
-        const entries = await entriesResponse.json();
-
+        
+        const submissions = await submissionsResponse.json();
+        console.log(`Se encontraron ${submissions.length} envíos en el formulario`);
+        
+        // Transformar los datos para que coincidan con tu formato esperado
+        const products = submissions.map(submission => ({
+            id: submission.id,
+            data: {
+                product: submission.data.product || '',
+                price: parseFloat(submission.data.price || 0),
+                quantity: parseInt(submission.data.quantity || 0)
+            }
+        }));
+        
         return {
             statusCode: 200,
-            body: JSON.stringify(entries),
+            body: JSON.stringify(products)
         };
     } catch (error) {
+        console.error('Error en la función GET:', error);
         return {
             statusCode: 500,
-            body: JSON.stringify({ message: 'Error interno del servidor', error: error.message }),
+            body: JSON.stringify({ message: 'Error interno del servidor', error: error.message })
         };
     }
 };
+
+module.exports = { handler };
