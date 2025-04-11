@@ -4,19 +4,23 @@ document.addEventListener('DOMContentLoaded', () => {
         const product = document.getElementById('product').value;
         const price = document.getElementById('price').value;
         const quantity = document.getElementById('quantity').value;
-
+    
         const response = await fetch('/.netlify/functions/post', {
             method: 'POST',
+            headers: {
+                'Content-Type': 'application/json',
+            },
             body: JSON.stringify({ product, price, quantity }),
         });
-
-        const result = await response.json();
+    
         if (response.ok) {
+            const result = await response.json();
             alert(result.message);
         } else {
-            alert('Error al crear el producto');
+            const errorText = await response.text();
+            alert(`Error: ${errorText}`);
         }
-
+    
         e.target.reset();
     });
 
