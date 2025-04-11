@@ -1,8 +1,7 @@
-const fetch = require('node-fetch');
+import fetch from 'node-fetch';
 
-exports.handler = async () => {
+export const handler = async () => {
     try {
-        // Obtén los datos del formulario desde la API de Netlify
         const response = await fetch('https://api.netlify.com/api/v1/forms', {
             headers: {
                 Authorization: `nfp_TDtuh4A8hbXdUjFZCbVySq2QqK9j8sfZ451b`, // Reemplaza con tu token de acceso personal
@@ -15,7 +14,6 @@ exports.handler = async () => {
 
         const forms = await response.json();
 
-        // Encuentra el formulario específico por su nombre (por ejemplo, "postForm")
         const form = forms.find((f) => f.name === 'postForm');
         if (!form) {
             return {
@@ -24,10 +22,9 @@ exports.handler = async () => {
             };
         }
 
-        // Obtén las entradas del formulario
         const entriesResponse = await fetch(`https://api.netlify.com/api/v1/forms/${form.id}/submissions`, {
             headers: {
-                Authorization: `nfp_TDtuh4A8hbXdUjFZCbVySq2QqK9j8sfZ451b`, // Reemplaza con tu token de acceso personal
+                Authorization: `nfp_TDtuh4A8hbXdUjFZCbVySq2QqK9j8sfZ451b`,
             },
         });
 
@@ -37,7 +34,6 @@ exports.handler = async () => {
 
         const entries = await entriesResponse.json();
 
-        // Devuelve las entradas como respuesta
         return {
             statusCode: 200,
             body: JSON.stringify(entries),

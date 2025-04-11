@@ -1,15 +1,14 @@
-const fetch = require('node-fetch');
+import fetch from 'node-fetch';
 
-exports.handler = async (event) => {
+export const handler = async (event) => {
     if (event.httpMethod === 'POST') {
         try {
             const productData = JSON.parse(event.body);
 
-            // Enviar los datos al formulario de Netlify
             const response = await fetch('https://api.netlify.com/api/v1/forms/YOUR_FORM_ID/submissions', {
                 method: 'POST',
                 headers: {
-                    Authorization: `nfp_TDtuh4A8hbXdUjFZCbVySq2QqK9j8sfZ451b`, // Reemplaza con tu token de acceso personal
+                    Authorization: `nfp_TDtuh4A8hbXdUjFZCbVySq2QqK9j8sfZ451b`,
                     'Content-Type': 'application/json',
                 },
                 body: JSON.stringify(productData),

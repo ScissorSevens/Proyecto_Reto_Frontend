@@ -1,11 +1,10 @@
-const fetch = require('node-fetch');
+import fetch from 'node-fetch';
 
-exports.handler = async (event) => {
+export const handler = async (event) => {
     if (event.httpMethod === 'DELETE') {
         try {
             const productData = JSON.parse(event.body);
 
-            // Obtén las entradas del formulario
             const entriesResponse = await fetch(`https://api.netlify.com/api/v1/forms/YOUR_FORM_ID/submissions`, {
                 headers: {
                     Authorization: `nfp_TDtuh4A8hbXdUjFZCbVySq2QqK9j8sfZ451b`,
@@ -18,7 +17,6 @@ exports.handler = async (event) => {
 
             const entries = await entriesResponse.json();
 
-            // Encuentra la entrada por ID
             const entry = entries.find((e) => e.data.id === productData.id);
             if (!entry) {
                 return {
@@ -27,7 +25,6 @@ exports.handler = async (event) => {
                 };
             }
 
-            // Elimina la entrada
             const deleteResponse = await fetch(`https://api.netlify.com/api/v1/submissions/${entry.id}`, {
                 method: 'DELETE',
                 headers: {
