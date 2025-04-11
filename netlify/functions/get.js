@@ -1,10 +1,10 @@
-import fetch from 'node-fetch';
+
 
 export const handler = async () => {
     try {
         const response = await fetch('https://api.netlify.com/api/v1/forms', {
             headers: {
-                Authorization: `nfp_TDtuh4A8hbXdUjFZCbVySq2QqK9j8sfZ451b`, // Reemplaza con tu token de acceso personal
+                Authorization: `Bearer nfp_qPjNuJCqxvHJZa9sv85dj9Cpjt8WTYTb2a5d`, // Reemplaza con tu token de acceso personal
             },
         });
 
@@ -24,7 +24,7 @@ export const handler = async () => {
 
         const entriesResponse = await fetch(`https://api.netlify.com/api/v1/forms/${form.id}/submissions`, {
             headers: {
-                Authorization: `nfp_TDtuh4A8hbXdUjFZCbVySq2QqK9j8sfZ451b`,
+                Authorization: `Bearer nfp_qPjNuJCqxvHJZa9sv85dj9Cpjt8WTYTb2a5d`,
             },
         });
 
