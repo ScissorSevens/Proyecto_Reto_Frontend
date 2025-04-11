@@ -1,20 +1,21 @@
-const data = require('./data'); // Importar el objeto compartido
+const fs = require('fs');
+const path = require('path');
+const filePath = path.join(__dirname, 'data.json');
 
 exports.handler = async (event) => {
     if (event.httpMethod === 'POST') {
         try {
             const productData = JSON.parse(event.body);
 
-            // Crear un nuevo producto
-            const newProduct = {
-                id: data.products.length + 1, // Generar un ID único
-                product: productData.product,
-                price: productData.price,
-                quantity: productData.quantity,
-            };
+            // Leer los datos existentes
+            const data = JSON.parse(fs.readFileSync(filePath, 'utf-8'));
 
-            // Agregar el producto al arreglo compartido
-            data.products.push(newProduct);
+            // Agregar el nuevo producto
+            const newProduct = { id: data.length + 1, ...productData };
+            data.push(newProduct);
+
+            // Guardar los datos actualizados
+            fs.writeFileSync(filePath, JSON.stringify(data, null, 2));
 
             return {
                 statusCode: 200,
