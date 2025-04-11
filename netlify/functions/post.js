@@ -1,20 +1,20 @@
-const { products } = require('./data'); // Importar los datos compartidos
+const data = require('./data'); // Importar el objeto compartido
 
 exports.handler = async (event) => {
     if (event.httpMethod === 'POST') {
         try {
-            const data = JSON.parse(event.body);
+            const productData = JSON.parse(event.body);
 
             // Crear un nuevo producto
             const newProduct = {
-                id: products.length + 1, // Generar un ID único
-                product: data.product,
-                price: data.price,
-                quantity: data.quantity,
+                id: data.products.length + 1, // Generar un ID único
+                product: productData.product,
+                price: productData.price,
+                quantity: productData.quantity,
             };
 
-            // Agregar el producto a la lista
-            products.push(newProduct);
+            // Agregar el producto al arreglo compartido
+            data.products.push(newProduct);
 
             return {
                 statusCode: 200,

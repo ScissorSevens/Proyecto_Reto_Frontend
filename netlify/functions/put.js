@@ -1,12 +1,12 @@
-const { products } = require('./data'); // Importar los datos compartidos
+const data = require('./data'); // Importar el objeto compartido
 
 exports.handler = async (event) => {
     if (event.httpMethod === 'PUT') {
         try {
-            const data = JSON.parse(event.body);
+            const productData = JSON.parse(event.body);
 
             // Buscar el producto por ID
-            const productIndex = products.findIndex((p) => p.id === data.id);
+            const productIndex = data.products.findIndex((p) => p.id === productData.id);
             if (productIndex === -1) {
                 return {
                     statusCode: 404,
@@ -15,15 +15,15 @@ exports.handler = async (event) => {
             }
 
             // Actualizar los datos del producto
-            if (data.product) products[productIndex].product = data.product;
-            if (data.price) products[productIndex].price = data.price;
-            if (data.quantity) products[productIndex].quantity = data.quantity;
+            if (productData.product) data.products[productIndex].product = productData.product;
+            if (productData.price) data.products[productIndex].price = productData.price;
+            if (productData.quantity) data.products[productIndex].quantity = productData.quantity;
 
             return {
                 statusCode: 200,
                 body: JSON.stringify({
                     message: 'Producto actualizado exitosamente',
-                    product: products[productIndex],
+                    product: data.products[productIndex],
                 }),
             };
         } catch (error) {

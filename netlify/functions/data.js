@@ -1,5 +1,3 @@
-let products = []; 
-
 module.exports = {
-    products,
+    products: [], // Lista de productos en memoria
 };
