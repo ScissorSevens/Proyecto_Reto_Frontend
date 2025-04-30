@@ -1,82 +1,49 @@
-
-
-// Leer Productos (GET)
-document.getElementById('getProducts').addEventListener('click', async () => {
+document.addEventListener('DOMContentLoaded', async () => {
     try {
-        const response = await fetch('/.netlify/functions/get');
-        if (!response.ok) {
-            throw new Error('Error al obtener los productos');
-        }
-        
-        const products = await response.json();
-        const productList = document.getElementById('productList');
-        productList.innerHTML = ''; // Limpiar la lista
-        
-        products.forEach((product) => {
-            const listItem = document.createElement('li');
-            listItem.textContent = `ID: ${product.id}, Producto: ${product.data.product}, Precio: ${product.data.price}, Cantidad: ${product.data.quantity}`;
-            productList.appendChild(listItem);
-        });
+      const response = await fetch('/.netlify/functions/getUsers_Co_Ve');
+      const data = await response.json();
+  
+      const compradoresList = document.getElementById('buyers-tab');
+      const vendedoresList = document.getElementById('sellers-tab');
+  
+      // Limpiar listas
+      compradoresList.innerHTML = '';
+      vendedoresList.innerHTML = '';
+  
+      // Mostrar compradores
+      data.compradores.forEach(comprador => {
+        const item = document.createElement('div');
+        item.classList.add('notification-item', 'buyer');
+        item.innerHTML = `
+          <div class="notification-icon-wrapper">
+            <i class="fas fa-user buyer-icon"></i>
+          </div>
+          <div class="notification-content">
+            <div class="notification-title">Nuevo Comprador</div>
+            <div class="notification-info">${comprador.nombre} - ${comprador.correo}</div>
+            <div class="notification-time">Estado: ${comprador.estado}</div>
+          </div>
+        `;
+        compradoresList.appendChild(item);
+      });
+  
+      // Mostrar vendedores
+      data.vendedores.forEach(vendedor => {
+        const item = document.createElement('div');
+        item.classList.add('notification-item', 'seller');
+        item.innerHTML = `
+          <div class="notification-icon-wrapper">
+            <i class="fas fa-store seller-icon"></i>
+          </div>
+          <div class="notification-content">
+            <div class="notification-title">Nuevo Vendedor</div>
+            <div class="notification-info">${vendedor.nombre} - ${vendedor.correo}</div>
+            <div class="notification-time">Estado: ${vendedor.estado}</div>
+          </div>
+        `;
+        vendedoresList.appendChild(item);
+      });
     } catch (error) {
-        console.error('Error al obtener los productos:', error);
-        alert('Error al obtener los productos.');
+      console.error('Error al cargar los usuarios:', error);
     }
-});
-
-// Eliminar Producto (DELETE)
-document.getElementById('deleteForm').addEventListener('submit', async (event) => {
-    event.preventDefault(); // Evitar que el formulario recargue la página
-    const productId = document.getElementById('deleteId').value;
-    
-    try {
-        const response = await fetch('/.netlify/functions/delete', {
-            method: 'DELETE',
-            headers: {
-                'Content-Type': 'application/json',
-            },
-            body: JSON.stringify({ id: productId }),
-        });
-        
-        const result = await response.json();
-        alert(result.message);
-    } catch (error) {
-        console.error('Error al eliminar el producto:', error);
-        alert('Error al eliminar el producto.');
-    }
-});
-
-// Actualizar Producto (PUT)
-document.getElementById('putForm').addEventListener('submit', async (event) => {
-    event.preventDefault(); // Evitar que el formulario recargue la página
-    
-    const productId = document.getElementById('updateId').value;
-    const updatedData = {
-        product: document.getElementById('updateProduct').value,
-        price: parseFloat(document.getElementById('updatePrice').value),
-        quantity: parseInt(document.getElementById('updateQuantity').value),
-    };
-    
-    try {
-        const response = await fetch('/.netlify/functions/put', {
-            method: 'PUT',
-            headers: {
-                'Content-Type': 'application/json',
-            },
-            body: JSON.stringify({ id: productId, ...updatedData }),
-        });
-        
-        const result = await response.json();
-        
-        if (response.ok) {
-            alert(result.message); // Mostrar mensaje de éxito
-        } else {
-            throw new Error(result.message || 'Error al actualizar el producto');
-        }
-    } catch (error) {
-        console.error('Error al actualizar el producto:', error);
-        alert('Error al actualizar el producto.');
-    }
-});
-
-// Asegúrate de que el formulario de crear funcione correctamente
-// No es necesario agregar un event listener ya que utiliza el atributo data-netlify="true"
+  });
