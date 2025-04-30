@@ -1,3 +1,5 @@
+
+
 // Leer Productos (GET)
 document.getElementById('getProducts').addEventListener('click', async () => {
     try {
