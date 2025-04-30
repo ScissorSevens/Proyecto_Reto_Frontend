@@ -12,15 +12,19 @@
  
   <script>
     document.getElementById('consultar').addEventListener('click', async () => {
-      const userId = 'user123'
+      const userId = 'user123';
       try {
-        const response = await fetch(`https://deluxe-madeleine-9213e6.netlify.app/netlify/functions/getUser?id=${userId}`);
+        console.log('Realizando solicitud...');
+        const response = await fetch(`https://deluxe-madeleine-9213e6.netlify.app/.netlify/functions/getUser?id=${userId}`);
+        console.log('Respuesta recibida:', response);
         if (!response.ok) {
           throw new Error(`Error: ${response.status}`);
         }
         const data = await response.json();
+        console.log('Datos recibidos:', data);
         document.getElementById('resultado').textContent = JSON.stringify(data, null, 2);
       } catch (error) {
+        console.error('Error en la solicitud:', error);
         document.getElementById('resultado').textContent = error.toString();
       }
     });
