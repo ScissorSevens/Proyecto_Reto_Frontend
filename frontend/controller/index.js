@@ -1,6 +1,7 @@
 document.addEventListener('DOMContentLoaded', async () => {
   try {
-    const response = await fetch('https://deluxe-madeleine-9213e6.netlify.app/.netlify/functions/getUsers_Co_Ve');
+    const response = await fetch('/.netlify/functions/getUsers_Co_Ve');
+    console.log('Función getUsers_Co_Ve llamada');
     const data = await response.json();
 
     const compradoresList = document.getElementById('buyers-tab');
