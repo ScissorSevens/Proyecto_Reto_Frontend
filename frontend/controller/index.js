@@ -12,17 +12,23 @@ document.addEventListener('DOMContentLoaded', async () => {
     vendedoresList.innerHTML = '';
 
     // Control dinámico del estado vacío para compradores
-    if (data.compradores.length === 0) {
-      document.querySelector('#buyers-tab .empty-state').style.display = 'block';
-    } else {
-      document.querySelector('#buyers-tab .empty-state').style.display = 'none';
+    const emptyStateBuyers = document.querySelector('#buyers-tab .empty-state');
+    if (emptyStateBuyers) {
+      if (data.compradores.length === 0) {
+        emptyStateBuyers.style.display = 'block';
+      } else {
+        emptyStateBuyers.style.display = 'none';
+      }
     }
 
     // Control dinámico del estado vacío para vendedores
-    if (data.vendedores.length === 0) {
-      document.querySelector('#sellers-tab .empty-state').style.display = 'block';
-    } else {
-      document.querySelector('#sellers-tab .empty-state').style.display = 'none';
+    const emptyStateSellers = document.querySelector('#sellers-tab .empty-state');
+    if (emptyStateSellers) {
+      if (data.vendedores.length === 0) {
+        emptyStateSellers.style.display = 'block';
+      } else {
+        emptyStateSellers.style.display = 'none';
+      }
     }
 
     // Mostrar compradores
