@@ -152,78 +152,22 @@
               <div
                 class="notification-list"
                 id="sellers-tab"
-                style="display: none"
+                style="display: block"
               >
-                <!-- Seller Registration -->
-                <div class="notification-item seller">
-                  <div class="notification-icon-wrapper">
-                    <i class="fas fa-store seller-icon"></i>
-                  </div>
-                  <div class="notification-content">
-                    <div class="notification-title">
-                      Nuevo Vendedor Registrado
-                    </div>
-                    <div class="notification-info">
-                      
-                    </div>
-                    <div class="notification-time"></div>
-                  </div>
-                  <div class="notification-actions">
-                    <button class="action-btn view-btn"></button>
-                  </div>
-                </div>
-
-                <!-- Empty state when no sellers -->
-                <div class="empty-state" style="display: none">
-                  <i class="fas fa-store"></i>
-                  <p>No hay nuevos vendedores registrados</p>
+                 <!-- Aquí se renderizarán los compradores -->
+                 <div class="empty-state" style="display: none">
+                  <i class="fas fa-user"></i>
+                  <p>No hay nuevos compradores pendientes de aprobación</p>
                 </div>
               </div>
 
               <div
                 class="notification-list"
                 id="buyers-tab"
-                style="display: none"
+                style="display: block"
               >
                 <!-- Buyer Registration Pending Approval -->
-                <div class="notification-item buyer">
-                  <div class="notification-icon-wrapper">
-                    <i class="fas fa-user buyer-icon"></i>
-                  </div>
-                  <div class="notification-content">
-                    <div class="notification-title">
-                      Nuevo Comprador Pendiente
-                    </div>
-                    <div class="notification-info">
-                      María González - Restaurante El Campesino
-                    </div>
-                    <div class="notification-time">Hace 1 hora</div>
-                  </div>
-                  <div class="notification-actions">
-                    <button class="action-btn approve-btn">Aprobar</button>
-                    <button class="action-btn reject-btn">Rechazar</button>
-                  </div>
-                </div>
-
-                <!-- Buyer Registration Pending Approval -->
-                <div class="notification-item buyer">
-                  <div class="notification-icon-wrapper">
-                    <i class="fas fa-user buyer-icon"></i>
-                  </div>
-                  <div class="notification-content">
-                    <div class="notification-title">
-                      Nuevo Comprador Pendiente
-                    </div>
-                    <div class="notification-info">
-                      Carlos López - Distribuidora Agrícola
-                    </div>
-                    <div class="notification-time">Hace 2 horas</div>
-                  </div>
-                  <div class="notification-actions">
-                    <button class="action-btn approve-btn">Aprobar</button>
-                    <button class="action-btn reject-btn">Rechazar</button>
-                  </div>
-                </div>
+                
 
                 <!-- Empty state when no buyers -->
                 <div class="empty-state" style="display: none">
@@ -240,6 +184,6 @@
       </div>
       <div class="item">Footer</div>
     </div>
-    <script  src="index.js" ></script>
+    <script  src="index.js" defer ></script>
   </body>
 </html>
