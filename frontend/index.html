@@ -1,129 +1,94 @@
 <!DOCTYPE html>
 <html lang="en">
-  <head>
-    <meta charset="UTF-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="styles_header.css">
+    <link rel="stylesheet" href="styles_index.css">
+    <link rel="stylesheet" href="schoping_cart.css">
     <title>Document</title>
-    <link rel="stylesheet" href="styles.css" />
-    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" rel="stylesheet">
-  </head>
-  <body>
+</head>
+<body>
     <div class="container">
-      <!--header-->
-      <div class="item">
         <header class="header">
-          <div class="hamburger-menu">
-            <i class="fas fa-bars"></i>
-          </div>
           <div class="logo">
-            <i class="fas fa-leaf"></i>
-            <a href="index.html"><h1>AGROCONECTA</h1></a>
-          </div>
-          <div class="header-right">
-            <div class="notification-icon">
-              <i class="fas fa-bell"></i>
-              <div class="notification-count"></div>
-            </div>
-            <div class="user-profile">
-              <div class="avatar">
-                <i class="fas fa-user"></i>
-              </div>
-              <span>Admin</span>
-            </div>
-          </div>
-        </header>
-        <!--sidebar-->
-        <div class="item">
-          <div class="sidebar">
-            <div class="sidebar-menu">
-              <div class="menu-item active">
-                <i class="fas fa-tachometer-alt"></i>
-                <span>Dashboard</span>
-              </div>
-              <div class="menu-item">
-                <i class="fas fa-users"></i>
-                <span>Usuarios</span>
-              </div>
-              <div class="menu-item">
-                <i class="fas fa-store"></i>
-                <span>Vendedores</span>
-              </div>
-              <div class="menu-item">
-                <i class="fas fa-shopping-cart"></i>
-                <span>Compradores</span>
-              </div>
-              <div class="menu-item">
-                <i class="fas fa-box"></i>
-                <span>Productos</span>
-              </div>
-              <div class="menu-item">
-                <i class="fas fa-chart-bar"></i>
-                <span>Reportes</span>
-              </div>
-              <div class="menu-item">
-                <i class="fas fa-cog"></i>
-                <span>Configuración</span>
-              </div>
-              <div class="menu-item">
-                <i class="fas fa-sign-out-alt"></i>
-                <span>Cerrar Sesión</span>
-              </div>
-            </div>
-          </div>
-        </div>
-        <!--content-->
-        <div class="item">
-          <div class="content-wrapper">
-            <h1 class="dashboard-title">Panel de Administración</h1>
-
-            <div class="notification-section">
-              <div class="section-title">
-                <h2>Notificaciones de Registro</h2>
-                <span>Nuevos registros</span>
-              </div>
-
-              <div class="tab-switcher">
-                <div class="tab active" data-tab="all">Todos</div>
-                <div class="tab" data-tab="sellers">Vendedores</div>
-                <div class="tab" data-tab="buyers">Compradores</div>
-              </div>
-
-              <div class="notification-list" id="all-tab">            
-              <div
-                class="notification-list"
-                id="sellers-tab"
-                style="display: block"
-              >
-                 <!-- Aquí se renderizarán los compradores -->
-                 <div class="empty-state" style="display: none">
-                  <i class="fas fa-user"></i>
-                  <p>No hay nuevos compradores pendientes de aprobación</p>
-                </div>
-              </div>
-
-              <div
-                class="notification-list"
-                id="buyers-tab"
-                style="display: block"
-              >
-                <!-- Buyer Registration Pending Approval -->
-                
-
-                <!-- Empty state when no buyers -->
-                <div class="empty-state" style="display: none">
-                  <i class="fas fa-user"></i>
-                  <p>No hay nuevos compradores pendientes de aprobación</p>
-                </div>
-              </div>
-            </div>
-          </div>
-
-          <!-- Overlay for mobile view -->
-          <div class="overlay"></div>
-        </div>
+        <img
+         src="/img/a-vector-logo-with-a-stylized-green-leaf_8dZD_CGEQa6K9jyHdqpQ_w_vWyUEu7vSA-fFHgDYuMqqA-removebg-preview.png"
+          alt="logo"
+        />
+        <a class="Name__logo" href="/">Agroconecta</a>
       </div>
-      <div class="item">Footer</div>
-    </div>
-    <script  src="controller/index.js" defer ></script>
-  </body>
+      <nav>
+        <ul class="nav-links">
+            <li><a href="registrarse.html">Registrarse</a></li>
+          <li><a href="login.html">Ingresar</a></li>
+        </ul>
+      </nav>
+      <span class="navigation_group">
+  <button type="button" class="shopping__cart__btn notification__wrapper" >
+    <!-- Icono de carrito -->
+    <img src="/img/shopping-cart.svg" alt="carrito de compras" />
+    <div class="notification__count"></div>
+  </button>
+</span>
+<div class="dropdown__wrapper__cart hide dropdown__shoping__cart--fade-in none"
+></div>
+      <span class="navigation_group">
+        <button type="button" class="profile__btn" >
+          <!-- Icono de perfil -->
+          <img
+            src="img/user-circle .svg"
+            alt="usuario"
+          />
+        </button>
+      </span>
+      <div class="dropdown__wrapper hide dropdown__wrapper--fade-in none">
+        <nav class="dropdown">
+          <div class="profile__wrapper">
+            <!-- Avatar del perfil -->
+            <img
+              class="profile__avatar"
+              src="img/user-circle .svg"
+              alt="usuario"
+            />
+            <div class="profile__info" id="userProfile">
+              <h2 class="profile__name" id="profileName"></h2>
+              <p class="profile__email" id="profileEmail"></p>
+            </div>
+          </div>
+          <hr class="divider" />
+          <ul class="dropdown__list">
+            <li class="dropdown__item">
+              <a  id="salir">salir</a>
+            </li>
+          </ul>
+        </nav>
+      </div>
+
+        </header>
+        <main class="main-content">
+            <section class="featured-section">
+            <div class="section-header">
+                <h2>Productos frescos</h2>
+                <button class="button">Ver Todo</button>
+            </div>
+            <div class="product-grid" id="product-gridc"></div>
+        </section>
+
+    
+        </main>
+        <!-- <footer>
+          <div class="footer-content">
+            <p>Agroconecta &copy; 2025</p>
+          </div>
+        </footer> -->
+      </div>
+      <script src="controller/wrapper.js" defer></script>
+      <script src="controller/productos.js" defer></script>
+      <script src="controller/mostrarboton.js" defer></script>
+     
+
+  
+</script>
+</body>
 </html>

@@ -1,0 +1,221 @@
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+}
+
+
+body {
+color: #5e7465;
+background: #ffffff;
+font-family: "Poppins";
+} 
+
+.main{
+display: flex;
+justify-content: center;
+align-items: center;
+height: 75vh;
+box-sizing: border-box;
+}
+
+.card {
+  --color-primary: #388E3C;
+  --color-border: #d0d0d6;
+  display: flex;
+  flex-direction: column;
+  background: #ffffff;
+  border-radius: 22px;
+  padding: 20px;
+  width: clamp(300px, 85vw, 600px);
+  box-shadow: 0 0 10px rgba(0, 0, 0, 0.2);
+ 
+}
+
+.hero, form{
+    flex: 1 1 50%;
+}
+
+.hero{
+    background: url("img/hero.png");
+    background-size: cover;
+    background-repeat: no-repeat;
+    border-radius: 16px;
+    overflow: hidden;
+    font-family: "Space Grotesk";
+}
+
+
+
+.hero-inner {
+display: flex;
+flex-direction: column;
+justify-content: center;
+border-radius: inherit;
+background:
+linear-gradient(
+rgb(95 69 168 / 0%), rgba(63, 150, 70, 0.7));
+padding: 40px 66px;
+height: 100%;
+min-height: 170px;
+}
+
+.hero h2 {
+
+font-size: 22px;
+color: #ffffff;
+
+}
+
+.hero h3 {
+margin-top: 12px;
+font-size: 16px;
+color: #ffffff;
+display: none;
+}
+
+form{
+    padding: 30px 18px;
+    display: flex;
+    flex-direction: column;
+    gap:12px
+}
+
+form > h2 {
+    color: var(--color-primary);
+}
+
+button, input {
+    height: 44px;
+    border-radius: 6px;
+    border: 1px solid var(--color-border);
+    background: transparent;
+    color:inherit;
+    width: 100%;
+    outline-color: var(--color-primary);
+}
+
+input {
+    padding: 0 2.5vw;   
+}
+
+input::placeholder {
+    color: #9c99a4;
+}
+
+.socials{
+    display: flex;
+    gap: 8px;
+}
+
+.extra-text{
+    display: none;
+}
+
+.social-btn{
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 10px;
+    background: #f2f3f6;
+}
+
+form > button[type="submit"] {
+    color: #ffffff;
+    background: var(--color-primary);
+    font-size: 17px
+};
+
+.or{
+    position: relative;
+    text-align: center ;
+    height: 24px;
+    margin: 0 auto;
+    width: 90%;
+}
+
+
+
+@media (width >= 485px) {
+
+.card {
+
+width: clamp(300px,90vw, 740px); }
+
+form { 
+    padding-left: 48px; padding-right: 48px; 
+}
+
+.hero-inner {
+padding-right:
+clamp(10px,20vw, 60px);
+}
+.socials { 
+    flex-direction: column; 
+}
+.extra-text {
+display: inline; }
+}
+
+@media (width >= 640px) 
+{ .card { flex-direction: row; padding: 8px 8px 8px; }
+
+form:is(h2, h3) { text-align: left; }
+
+.hero-inner { justify-content: center; align-items: flex-start; padding: 36px; }
+
+.hero h3 { display: block; }
+
+form { padding: 30px; }}
+
+
+/*checkbox*/
+.container input[type="radio"] {
+  position: absolute;
+  opacity: 0;
+  cursor: pointer;
+  height: 0;
+  width: 0;
+}
+
+.container .checkmark {
+  position: relative;
+  height: 1.3em;
+  width: 1.3em;
+  background: #606062;
+  border-radius: 5px;
+  box-shadow: 0px 0px 1px rgba(0, 0, 0, 0.3), 0px 1px 1px rgba(0, 5);
+}
+
+.container input:checked ~ .checkmark {
+  background-image: linear-gradient(#b9e9b3, #a8e4a0);
+}
+
+/* When the checkbox is checked, add a blue background */
+.container input:checked ~ .checkmark {
+ background-image: linear-gradient(#b9e9b3,#a8e4a0)
+}
+
+/* Create the checkmark/indicator (hidden when not checked) */
+.checkmark:after {
+ content: "";
+ position: absolute;
+ display: none;
+}
+
+/* Show the checkmark when checked */
+.container input:checked ~ .checkmark:after {
+ display: block;
+}
+
+/* Style the checkmark/indicator */
+.container .checkmark:after {
+ left: 0.45em;
+ top: 0.25em;
+ width: 0.25em;
+ height: 0.5em;
+ border: solid white;
+ border-width: 0 0.15em 0.15em 0;
+ transform: rotate(45deg);
+}

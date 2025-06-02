@@ -1,0 +1,104 @@
+<!DOCTYPE html>
+<html lang="es">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link rel="stylesheet" href="styles_header.css" />
+    <link rel="stylesheet" href="styles_registrarse.css" />
+    <title>Document</title>
+  </head>
+  <body>
+    <header class="header">
+      <div class="logo">
+        <img
+         src="/img/a-vector-logo-with-a-stylized-green-leaf_8dZD_CGEQa6K9jyHdqpQ_w_vWyUEu7vSA-fFHgDYuMqqA-removebg-preview.png"
+          alt="logo"
+        />
+        <a class="Name__logo" href="/">Agroconecta</a>
+      </div>
+      <nav>
+        <ul class="nav-links">
+            <li><a href="registrarse.html">Registrarse</a></li>
+          <li><a href="login.html">Ingresar</a></li>
+        </ul>
+      </nav>
+      <span class="navigation_group">
+        <button type="button" class="profile__btn" style="display: none;">
+          <!-- Icono de perfil -->
+          <img
+            src="img/user-circle .svg"
+            alt="usuario"
+          />
+        </button>
+      </span>
+      <div class="dropdown__wrapper hide dropdown__wrapper--fade-in none">
+        <nav class="dropdown">
+          <div class="profile__wrapper">
+            <!-- Avatar del perfil -->
+            <img
+              class="profile__avatar"
+              src="{{ url_for('static', filename='img/user-circle .svg') }}"
+              alt="usuario"
+            />
+            <div class="profile__info" id="userProfile">
+              <h2 class="profile__name" id="profileName"></h2>
+              <p class="profile__email" id="profileEmail"></p>
+            </div>
+          </div>
+          <hr class="divider" />
+          <ul class="dropdown__list">
+            <li class="dropdown__item">
+              <a href="#">compras</a>
+              <a href="/">historial</a>
+            </li>
+          </ul>
+          <hr class="divider" />
+          <ul class="dropdown__list">
+            <li class="dropdown__item">
+              <a id="salir" style="display: none">salir</a>
+            </li>
+          </ul>
+        </nav>
+      </div>
+    </header>
+    <main class="main">
+      <div class="card">
+        <div class="hero">
+          <div class="hero-inner">
+            <h2>Trabajo con nosotros</h2>
+
+            <h3>Agroconecta</h3>
+          </div>
+        </div>
+
+        <form id="loginForm">
+          <h2>Agroconecta</h2>
+          <h3>Ingresar</h3>
+          <div class="socials">
+            <button class="social-btn">
+              <img src="google.svg" />
+              <p>
+                <span class="extra-text">Ingresar con</span>
+                Google
+              </p>
+            </button>
+          </div>
+          <input type="email" id="emailInput" placeholder="Email" />
+          <input type="password" id="passwordInput" placeholder="Password" />
+          <button type="submit">Iniciar Sesión</button>
+        </form>
+      </div>
+    </main>
+
+    <footer></footer>
+    <script src="controller/login.js" defer> </script>
+     <script>document.addEventListener('DOMContentLoaded', () => {
+  const currentPage = window.location.pathname;
+  const registerLink = document.querySelector('a[href="login.html"]'); // Selecciona el enlace de "Registrarse"
+
+  if (currentPage.includes('login.html')) {
+    registerLink.parentElement.style.display = 'none'; // Oculta el elemento <li>
+  }
+});</script>
+  </body>
+</html>
