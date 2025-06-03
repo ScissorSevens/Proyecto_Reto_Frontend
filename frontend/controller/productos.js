@@ -200,12 +200,98 @@ const disminuirCantidad = (e) => {
 };
 
 const procesarCompra = () => {
-  // Aquí iría la lógica para procesar la compra
+  // Verificar si hay una sesión activa
+  const sesionActiva = sessionStorage.getItem('user');
+  
+  if (!sesionActiva) {
+    // Mostrar modal de inicio de sesión
+    mostrarModalInicioSesion();
+    return;
+  }
+
+  // Si hay sesión activa, proceder con la compra
   alert('Procesando tu compra...');
-   localStorage.setItem("carrito", JSON.stringify(carrito));
+  localStorage.setItem("carrito", JSON.stringify(carrito));
 
   // Redirigir al formulario de pedidos
-  window.location.href = "/formulario_pedidos";
+  window.location.href = "/formulario.html";
+};
+
+// Función para mostrar el modal de inicio de sesión
+const mostrarModalInicioSesion = () => {
+  // Crear el modal
+  const modal = document.createElement('div');
+  modal.className = 'modal-overlay';
+  modal.innerHTML = `
+    <div class="modal-content">
+      <div class="modal-header">
+        <h3>Iniciar Sesión Requerido</h3>
+        <button class="modal-close" aria-label="Cerrar">&times;</button>
+      </div>
+      <div class="modal-body">
+        <div class="modal-icon">
+          <svg width="48" height="48" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+            <path d="M20 21V19C20 17.9391 19.5786 16.9217 18.8284 16.1716C18.0783 15.4214 17.0609 15 16 15H8C6.93913 15 5.92172 15.4214 5.17157 16.1716C4.42143 16.9217 4 17.9391 4 19V21" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+            <circle cx="12" cy="7" r="4" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+          </svg>
+        </div>
+        <p>Para continuar con tu compra, necesitas iniciar sesión en tu cuenta.</p>
+        <p class="modal-subtitle">¿Qué deseas hacer?</p>
+      </div>
+      <div class="modal-actions">
+        <button class="btn-secondary" id="btn-cancelar">Cancelar</button>
+        <button class="btn-primary" id="btn-iniciar-sesion">Iniciar Sesión</button>
+        <button class="btn-outline" id="btn-registrarse">Registrarse</button>
+      </div>
+    </div>
+  `;
+
+  // Agregar el modal al body
+  document.body.appendChild(modal);
+
+  // Agregar eventos
+  const btnCerrar = modal.querySelector('.modal-close');
+  const btnCancelar = modal.querySelector('#btn-cancelar');
+  const btnIniciarSesion = modal.querySelector('#btn-iniciar-sesion');
+  const btnRegistrarse = modal.querySelector('#btn-registrarse');
+
+  // Función para cerrar el modal
+  const cerrarModal = () => {
+    modal.classList.add('closing');
+    setTimeout(() => {
+      document.body.removeChild(modal);
+    }, 300);
+  };
+
+  // Eventos de botones
+  btnCerrar.addEventListener('click', cerrarModal);
+  btnCancelar.addEventListener('click', cerrarModal);
+  
+  btnIniciarSesion.addEventListener('click', () => {
+    // Guardar el carrito antes de redirigir
+    localStorage.setItem("carrito", JSON.stringify(carrito));
+    // Redirigir a la página de login
+    window.location.href = "/login.html";
+  });
+
+  btnRegistrarse.addEventListener('click', () => {
+    // Guardar el carrito antes de redirigir
+    localStorage.setItem("carrito", JSON.stringify(carrito));
+    // Redirigir a la página de registro
+    window.location.href = "/registrarse.html";
+  });
+
+  // Cerrar modal al hacer clic fuera de él
+  modal.addEventListener('click', (e) => {
+    if (e.target === modal) {
+      cerrarModal();
+    }
+  });
+
+  // Mostrar modal con animación
+  setTimeout(() => {
+    modal.classList.add('show');
+  }, 10);
 };
 
 // Actualizar contador en el icono del carrito
@@ -277,3 +363,163 @@ estilosMensaje.innerHTML = `
   }
 `;
 document.head.appendChild(estilosMensaje);
+
+// Agregar estilos para el modal de inicio de sesión
+const estilosModal = document.createElement('style');
+estilosModal.innerHTML = `
+  .modal-overlay {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(0, 0, 0, 0.7);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    z-index: 1001;
+    opacity: 0;
+    transition: opacity 0.3s ease;
+  }
+
+  .modal-overlay.show {
+    opacity: 1;
+  }
+
+  .modal-overlay.closing {
+    opacity: 0;
+  }
+
+  .modal-content {
+    background: white;
+    border-radius: 12px;
+    max-width: 420px;
+    width: 90%;
+    max-height: 90vh;
+    overflow-y: auto;
+    box-shadow: 0 10px 25px rgba(0, 0, 0, 0.2);
+    transform: translateY(-20px);
+    transition: transform 0.3s ease;
+  }
+
+  .modal-overlay.show .modal-content {
+    transform: translateY(0);
+  }
+
+  .modal-header {
+    padding: 20px 24px 0;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+  }
+
+  .modal-header h3 {
+    margin: 0;
+    color: #1f2937;
+    font-size: 1.25rem;
+    font-weight: 600;
+  }
+
+  .modal-close {
+    background: none;
+    border: none;
+    font-size: 24px;
+    cursor: pointer;
+    color: #6b7280;
+    padding: 0;
+    width: 32px;
+    height: 32px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border-radius: 6px;
+    transition: background-color 0.2s;
+  }
+
+  .modal-close:hover {
+    background-color: #f3f4f6;
+  }
+
+  .modal-body {
+    padding: 24px;
+    text-align: center;
+  }
+
+  .modal-icon {
+    margin-bottom: 16px;
+    color: #6b7280;
+  }
+
+  .modal-body p {
+    margin: 0 0 12px 0;
+    color: #4b5563;
+    line-height: 1.5;
+  }
+
+  .modal-subtitle {
+    font-weight: 500;
+    color: #1f2937;
+    margin-top: 20px !important;
+  }
+
+  .modal-actions {
+    padding: 0 24px 24px;
+    display: flex;
+    gap: 12px;
+    flex-wrap: wrap;
+  }
+
+  .modal-actions button {
+    flex: 1;
+    min-width: 100px;
+    padding: 10px 16px;
+    border-radius: 6px;
+    font-weight: 500;
+    cursor: pointer;
+    transition: all 0.2s;
+    border: 1px solid;
+  }
+
+  .btn-primary {
+    background-color: #059669;
+    color: white;
+    border-color: #059669;
+  }
+
+  .btn-primary:hover {
+    background-color: #047857;
+    border-color: #047857;
+  }
+
+  .btn-secondary {
+    background-color: #6b7280;
+    color: white;
+    border-color: #6b7280;
+  }
+
+  .btn-secondary:hover {
+    background-color: #4b5563;
+    border-color: #4b5563;
+  }
+
+  .btn-outline {
+    background-color: transparent;
+    color: #059669;
+    border-color: #059669;
+  }
+
+  .btn-outline:hover {
+    background-color: #f0fdf4;
+  }
+
+  @media (max-width: 640px) {
+    .modal-actions {
+      flex-direction: column;
+    }
+
+    .modal-actions button {
+      flex: none;
+    }
+  }
+`;
+document.head.appendChild(estilosModal);

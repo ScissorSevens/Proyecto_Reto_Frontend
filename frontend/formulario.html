@@ -1,0 +1,92 @@
+<!DOCTYPE html>
+<html lang="es">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+    <link rel="stylesheet" href="formulario.css" />
+  </head>
+  <body>
+    <div class="container">
+      <h2>Formulario de Pago</h2>
+      <form id="formularioPago" method="POST" action="/enviar_confirmacion">
+        <h3>Datos Personales</h3>
+        <div class="form-group">
+          <label for="nombres">Nombres:</label>
+          <input type="text" id="nombres" name="nombres" required />
+        </div>
+        <div class="form-group">
+          <label for="apellidos">Apellidos:</label>
+          <input type="text" id="apellidos" name="apellidos" required />
+        </div>
+        <div class="form-group">
+          <label for="telefono">Teléfono:</label>
+          <input type="tel" id="telefono" name="telefono" required />
+        </div>
+        <div class="form-group">
+          <label for="correo">Correo electrónico:</label>
+          <input type="email" id="correo" name="correo" required />
+        </div>
+        <div class="form-group">
+          <label for="direccion">Dirección:</label>
+          <input type="text" id="direccion" name="direccion" required />
+        </div>
+
+        <hr />
+
+        <h3>Datos de Pago</h3>
+        <div class="form-group">
+          <label for="tipoTarjeta">Tipo de Tarjeta:</label>
+          <select id="tipoTarjeta" name="tipoTarjeta" required>
+            <option value="">Seleccione tipo de tarjeta</option>
+            <option value="credito">Tarjeta de Crédito</option>
+            <option value="debito">Tarjeta de Débito</option>
+          </select>
+        </div>
+        <div class="form-group">
+          <label for="nombreTitular">Nombre del Titular:</label>
+          <input type="text" id="nombreTitular" name="nombreTitular" required />
+        </div>
+        <div class="form-group">
+          <label for="numeroTarjeta">Número de Tarjeta:</label>
+          <input
+            type="text"
+            id="numeroTarjeta"
+            name="numeroTarjeta"
+            maxlength="16"
+            placeholder="XXXX XXXX XXXX XXXX"
+            required
+          />
+        </div>
+        <div class="card-row">
+          <div class="form-group">
+            <label for="fechaExpiracion">Fecha de Expiración:</label>
+            <input
+              type="text"
+              id="fechaExpiracion"
+              name="fechaExpiracion"
+              placeholder="MM/AA"
+              maxlength="5"
+              required
+            />
+          </div>
+          <div class="form-group cvv">
+            <label for="cvv">CVV:</label>
+            <input type="password" id="cvv" name="cvv" maxlength="4" required />
+          </div>
+        </div>
+
+        <div class="button-container-alt">
+          <button type="button" id="btnVolver" class="btn-secondary btn-secondary-alt">
+            Volver
+          </button>
+          <button type="submit" class="btn-primary btn-primary-alt">
+            Pagar
+          </button>
+        </div>
+      </form>
+      <div id="mensajeExito" class="mensaje">¡Gracias por su compra!</div>
+    </div>
+    <script src="controller/formulario.js"></script>
+  </body>
+</html>

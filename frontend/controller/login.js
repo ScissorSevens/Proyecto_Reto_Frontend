@@ -9,8 +9,6 @@ document.querySelector('form').addEventListener('submit', async (event) => {
   const email = emailInput.value;
   const password = passwordInput.value;
 
-  console.log('Datos ingresados:', { email, password }); // Registro de depuración
-
   try {
     const response = await fetch('/.netlify/functions/loginUser', {
       method: 'POST',
@@ -20,17 +18,11 @@ document.querySelector('form').addEventListener('submit', async (event) => {
 
     const result = await response.json();
 
-    console.log('Respuesta del servidor:', result); // Registro de depuración
-
     if (response.ok) {
-      console.log('Llamando a mostrarMensaje con éxito'); // Registro de depuración
       mostrarMensaje(`Bienvenido, ${result.user.nombre}`, 'success');
       sessionStorage.setItem('user', JSON.stringify(result.user));
-      setTimeout(() => {
-        window.location.href = '/index.html';
-      }, 3000);
+      window.location.href = '/index.html';
     } else {
-      console.log('Llamando a mostrarMensaje con error'); // Registro de depuración
       mostrarMensaje(result.error, 'error');
     }
   } catch (error) {
