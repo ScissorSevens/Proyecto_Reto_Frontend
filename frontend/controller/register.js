@@ -1,3 +1,5 @@
+const { mostrarMensaje } = require('./showmessages.js');
+
 document.querySelector('form').addEventListener('submit', async (event) => {
   event.preventDefault();
 
@@ -21,18 +23,14 @@ document.querySelector('form').addEventListener('submit', async (event) => {
     const result = await response.json();
 
     if (response.ok) {
-      alert(result.message);
-
-      // Limpiar los inputs
-      nameInput.value = "";
-      emailInput.value = "";
-      passwordInput.value = "";
-      userTypeInput.checked = false; // Desmarca el radio seleccionado
+      mostrarMensaje(`Registro exitoso. Bienvenido, ${name}`, 'success');
+      localStorage.setItem('user', JSON.stringify({ name, email, userType }));
+      window.location.href = '/index.html';
     } else {
-      alert(result.error);
+      mostrarMensaje(result.error, 'error');
     }
   } catch (error) {
     console.error('Error al registrar usuario:', error);
-    alert('Error al registrar usuario. Inténtalo de nuevo.');
+    mostrarMensaje('Error al registrar usuario. Inténtalo de nuevo.', 'error');
   }
 });
