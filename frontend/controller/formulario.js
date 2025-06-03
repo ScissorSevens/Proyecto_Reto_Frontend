@@ -66,6 +66,7 @@ document
         });
         alert("Correo enviado con éxito");
         document.getElementById("formularioPago").reset();
+        localStorageStorage.removeItem("carrito"); 
         window.location.href = "/index.html";
         
       } else {
