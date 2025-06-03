@@ -1,4 +1,4 @@
-const { mostrarMensaje } = require('./showmessages.js');
+import { mostrarMensaje } from './showmessages.js';
 
 document.querySelector('form').addEventListener('submit', async (event) => {
   event.preventDefault();

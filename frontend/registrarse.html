@@ -5,8 +5,8 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <link rel="stylesheet" href="styles_header.css" />
     <link rel="stylesheet" href="styles_registrarse.css" />
-    <link rel="stylesheet" href="node_modules/toastify-js/src/toastify.css">
-    <title>Document</title>
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/toastify-js/src/toastify.min.css">
+    <title>Registrarse</title>
   </head>
   <body>
     <header class="header">
@@ -101,7 +101,8 @@
       </div>
     </main>
     <footer></footer>
-    <script  src="controller/register.js" defer ></script>
+    <script  src="controller/register.js" type="module" defer ></script>
+    <script src="https://cdn.jsdelivr.net/npm/toastify-js"></script>
     <script>document.addEventListener('DOMContentLoaded', () => {
   const currentPage = window.location.pathname;
   const registerLink = document.querySelector('a[href="registrarse.html"]'); // Selecciona el enlace de "Registrarse"

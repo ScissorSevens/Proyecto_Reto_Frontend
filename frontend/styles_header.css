@@ -300,3 +300,55 @@
   ease-in-out 0.3s forwards;
 }
 
+/* Estilos para Toastify personalizado */
+.toastify-custom {
+  font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif !important;
+  border-radius: 12px !important;
+  box-shadow: 0 8px 32px rgba(0, 0, 0, 0.15) !important;
+  backdrop-filter: blur(10px) !important;
+  animation: slideInFromTop 0.5s ease-out !important;
+}
+
+.toastify-custom .toastify-content {
+  display: flex;
+  align-items: center;
+  font-weight: 500 !important;
+  font-size: 16px !important;
+  line-height: 1.4;
+}
+
+.toastify-custom::before {
+  content: '✓';
+  margin-right: 12px;
+  font-size: 18px;
+  font-weight: bold;
+  color: white;
+}
+
+.toastify-custom.error::before {
+  content: '⚠';
+}
+
+@keyframes slideInFromTop {
+  0% {
+    transform: translateY(-100px);
+    opacity: 0;
+  }
+  100% {
+    transform: translateY(0);
+    opacity: 1;
+  }
+}
+
+.toastify-custom .toast-close {
+  color: white !important;
+  font-size: 20px !important;
+  font-weight: bold !important;
+  opacity: 0.8 !important;
+  transition: opacity 0.2s ease !important;
+}
+
+.toastify-custom .toast-close:hover {
+  opacity: 1 !important;
+}
+

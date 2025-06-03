@@ -1,17 +1,31 @@
-// Importar Toastify desde node_modules
-import Toastify from "toastify-js";
-
-// Función para mostrar mensajes con Toastify
 const mostrarMensaje = (mensaje, tipo = "success") => {
   Toastify({
     text: mensaje,
-    duration: 3000, // Duración en milisegundos
-    close: true, // Mostrar botón de cierre
-    gravity: "bottom", // Posición: "top" o "bottom"
-    position: "right", // Posición: "left", "center" o "right"
-    backgroundColor: tipo === "success" ? "#4CAF50" : "#F44336", // Color según el tipo de mensaje
-    stopOnFocus: true, // Detener el temporizador si el usuario pasa el mouse
+    duration: 4000,
+    close: true,
+    gravity: "bottom",
+    position: "right",
+    backgroundColor:
+      tipo === "success"
+        ? "linear-gradient(135deg, #4CAF50, #45a049)"
+        : "linear-gradient(135deg, #F44336, #d32f2f)",
+    stopOnFocus: true,
+    className: tipo === "success" ? "toastify-custom" : "toastify-custom error",
+    style: {
+      background:
+        tipo === "success"
+          ? "linear-gradient(135deg, #4CAF50, #45a049)"
+          : "linear-gradient(135deg, #F44336, #d32f2f)",
+      borderRadius: "12px",
+      boxShadow: "0 8px 32px rgba(0, 0, 0, 0.2)",
+      fontSize: "16px",
+      fontWeight: "500",
+      padding: "16px 24px",
+      color: "white",
+      border: "none",
+      fontFamily: "'Segoe UI', Tahoma, Geneva, Verdana, sans-serif",
+    },
   }).showToast();
 };
 
-module.exports = { mostrarMensaje };
+export { mostrarMensaje };
