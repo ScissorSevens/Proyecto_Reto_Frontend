@@ -19,9 +19,30 @@ document.querySelector('form').addEventListener('submit', async (event) => {
     const result = await response.json();
 
     if (response.ok) {
-      mostrarMensaje(`Bienvenido, ${result.user.nombre}`, 'success');
+     
+      
+      // Guardar usuario en sessionStorage
       sessionStorage.setItem('user', JSON.stringify(result.user));
-      window.location.href = '/index.html';
+      
+      // Verificar si es admin y redirigir según el tipo de usuario
+      if (result.userType === 'admin') {
+        // Es un administrador - redirigir al dashboard
+        mostrarMensaje('Bienvenido Administrador', 'success');
+        setTimeout(() => {
+          window.location.href = '/dashboard.html'; // O la ruta de tu dashboard
+        }, 1500);
+      } else if (result.userType === 'user') {
+        mostrarMensaje(`Bienvenido, ${result.user.nombre}`, 'success');
+        setTimeout(() => {
+          window.location.href = '/index.html';
+        }, 1500);
+      }
+      
+      // Actualizar el estado de autenticación para ocultar enlaces
+      if (window.actualizarEstadoAutenticacion) {
+        window.actualizarEstadoAutenticacion();
+      }
+      
     } else {
       mostrarMensaje(result.error, 'error');
     }

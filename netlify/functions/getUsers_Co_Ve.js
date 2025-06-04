@@ -4,28 +4,51 @@ exports.handler = async (event, context) => {
   try {
     console.log('Iniciando función getUsers...');
 
-    const compradoresSnapshot = await admin.firestore().collection('compradores').get();
-    const vendedoresSnapshot = await admin.firestore().collection('vendedores').get();
+    // Buscar en la colección 'usuarios' y filtrar por userType
+    const usuariosSnapshot = await admin.firestore().collection('usuarios').get();
+    
+    const compradores = [];
+    const agronomos = [];
 
-    const compradores = compradoresSnapshot.docs.map(doc => ({
-      id: doc.id,
-      ...doc.data(),
-    }));
+    // Filtrar usuarios por userType
+    usuariosSnapshot.docs.forEach(doc => {
+      const userData = { id: doc.id, ...doc.data() };
+      
+      if (userData.userType === 'comprador') {
+        compradores.push(userData);
+      } else if (userData.userType === 'agronomo') {
+        agronomos.push(userData);
+      }
+    });
 
-    const vendedores = vendedoresSnapshot.docs.map(doc => ({
-      id: doc.id,
-      ...doc.data(),
-    }));
+    console.log('Compradores encontrados:', compradores.length);
+    console.log('Agronomos encontrados:', agronomos.length);
 
     return {
       statusCode: 200,
-      body: JSON.stringify({ compradores, vendedores }),
+      headers: {
+        'Access-Control-Allow-Origin': '*',
+        'Access-Control-Allow-Headers': 'Content-Type',
+      },
+      body: JSON.stringify({ 
+        compradores, 
+        agronomos, // Cambio de 'vendedores' a 'agronomos'
+        // Mantener vendedores para compatibilidad si es necesario
+        vendedores: agronomos 
+      }),
     };
   } catch (error) {
     console.error('Error en la función getUsers:', error);
     return {
       statusCode: 500,
-      body: JSON.stringify({ error: 'Error al obtener los usuarios', details: error.message }),
+      headers: {
+        'Access-Control-Allow-Origin': '*',
+        'Access-Control-Allow-Headers': 'Content-Type',
+      },
+      body: JSON.stringify({ 
+        error: 'Error al obtener los usuarios', 
+        details: error.message 
+      }),
     };
   }
 };

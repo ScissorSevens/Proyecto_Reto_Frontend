@@ -8,6 +8,10 @@
     --text-color: #333;
     --sidebar-width: 250px;
     --header-height: 60px;
+    --success-color: #4CAF50;
+    --danger-color: #f44336;
+    --warning-color: #ff9800;
+    --info-color: #2196F3;
 }
 
 a {
@@ -285,31 +289,160 @@ body {
 
 .notification-actions {
     display: flex;
+    gap: 8px;
     margin-left: 10px;
+    flex-shrink: 0;
 }
 
+/* Estilos para los botones de acción */
+.btn {
+    padding: 8px 16px;
+    border: none;
+    border-radius: 6px;
+    cursor: pointer;
+    font-size: 0.85rem;
+    font-weight: 500;
+    display: inline-flex;
+    align-items: center;
+    gap: 6px;
+    transition: all 0.3s ease;
+    text-decoration: none;
+    outline: none;
+    position: relative;
+    overflow: hidden;
+    min-width: 90px;
+    justify-content: center;
+}
+
+.btn:focus {
+    box-shadow: 0 0 0 3px rgba(0, 0, 0, 0.1);
+}
+
+.btn:active {
+    transform: translateY(1px);
+}
+
+/* Botón de Aprobar */
+.btn-approve {
+    background: linear-gradient(135deg, var(--success-color), #45a049);
+    color: white;
+    box-shadow: 0 2px 4px rgba(76, 175, 80, 0.3);
+}
+
+.btn-approve:hover {
+    background: linear-gradient(135deg, #45a049, #3d8b40);
+    box-shadow: 0 4px 8px rgba(76, 175, 80, 0.4);
+    transform: translateY(-2px);
+}
+
+.btn-approve:active {
+    background: linear-gradient(135deg, #3d8b40, #2e7d32);
+    transform: translateY(0);
+}
+
+/* Botón de Rechazar */
+.btn-reject {
+    background: linear-gradient(135deg, var(--danger-color), #da190b);
+    color: white;
+    box-shadow: 0 2px 4px rgba(244, 67, 54, 0.3);
+}
+
+.btn-reject:hover {
+    background: linear-gradient(135deg, #da190b, #c62828);
+    box-shadow: 0 4px 8px rgba(244, 67, 54, 0.4);
+    transform: translateY(-2px);
+}
+
+.btn-reject:active {
+    background: linear-gradient(135deg, #c62828, #b71c1c);
+    transform: translateY(0);
+}
+
+/* Efecto de ripple para los botones */
+.btn::before {
+    content: '';
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    width: 0;
+    height: 0;
+    border-radius: 50%;
+    background: rgba(255, 255, 255, 0.3);
+    transition: width 0.6s, height 0.6s, top 0.6s, left 0.6s;
+    transform: translate(-50%, -50%);
+}
+
+.btn:active::before {
+    width: 300px;
+    height: 300px;
+}
+
+/* Iconos dentro de los botones */
+.btn i {
+    font-size: 0.9rem;
+}
+
+/* Estados deshabilitados */
+.btn:disabled {
+    opacity: 0.6;
+    cursor: not-allowed;
+    transform: none !important;
+}
+
+.btn:disabled:hover {
+    transform: none;
+    box-shadow: none;
+}
+
+/* Botones legacy para compatibilidad */
 .action-btn {
-    padding: 6px 12px;
-    border-radius: 4px;
+    padding: 8px 16px;
+    border-radius: 6px;
     margin-left: 5px;
     cursor: pointer;
-    font-size: 0.8rem;
+    font-size: 0.85rem;
+    font-weight: 500;
     border: none;
+    transition: all 0.3s ease;
+    display: inline-flex;
+    align-items: center;
+    gap: 6px;
 }
 
 .approve-btn {
-    background-color: var(--primary-color);
+    background: linear-gradient(135deg, var(--success-color), #45a049);
     color: white;
+    box-shadow: 0 2px 4px rgba(76, 175, 80, 0.3);
+}
+
+.approve-btn:hover {
+    background: linear-gradient(135deg, #45a049, #3d8b40);
+    box-shadow: 0 4px 8px rgba(76, 175, 80, 0.4);
+    transform: translateY(-2px);
 }
 
 .reject-btn {
-    background-color: #f44336;
+    background: linear-gradient(135deg, var(--danger-color), #da190b);
     color: white;
+    box-shadow: 0 2px 4px rgba(244, 67, 54, 0.3);
+}
+
+.reject-btn:hover {
+    background: linear-gradient(135deg, #da190b, #c62828);
+    box-shadow: 0 4px 8px rgba(244, 67, 54, 0.4);
+    transform: translateY(-2px);
 }
 
 .view-btn {
-    background-color: #2196F3;
+    background: linear-gradient(135deg, var(--info-color), #1976d2);
     color: white;
+    box-shadow: 0 2px 4px rgba(33, 150, 243, 0.3);
+}
+
+.view-btn:hover {
+    background: linear-gradient(135deg, #1976d2, #1565c0);
+    box-shadow: 0 4px 8px rgba(33, 150, 243, 0.4);
+    transform: translateY(-2px);
 }
 
 .empty-state {
@@ -350,11 +483,15 @@ body {
 @media screen and (max-width: 768px) {
     .notification-actions {
         flex-direction: column;
+        gap: 5px;
     }
 
-    .action-btn {
-        margin-top: 5px;
+    .btn, .action-btn {
+        margin-top: 0;
         margin-left: 0;
+        min-width: 80px;
+        padding: 6px 12px;
+        font-size: 0.8rem;
     }
 
     .sidebar {
@@ -394,6 +531,16 @@ body {
     .content-wrapper.sidebar-active {
         margin-left: 0;
         opacity: 0.5;
+    }
+
+    .notification-actions {
+        width: 100%;
+    }
+
+    .btn, .action-btn {
+        min-width: 70px;
+        padding: 6px 10px;
+        font-size: 0.75rem;
     }
 
     .overlay {
